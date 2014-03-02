@@ -1,1 +1,0 @@
-// http://avalon.law.yale.edu/subject_menus/inaug.asp

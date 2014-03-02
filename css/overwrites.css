@@ -7,91 +7,60 @@ body {
 	padding: 40px 15px;
 }
 
-img {
-	width: 100%;
-}
-
-.treatment{
-	margin-bottom:10px;
-    border:1px solid rgba(255,255,255,.25);
-/*    box-shadow:0px 0px 8px rgba(0,0,0,.6)*/
-}
-
-/* Prevent the text contents of draggable elements from being selectable. */
-[draggable]{
-	-moz-user-select: none;
-	-khtml-user-select: none;
-	-webkit-user-select: none;
-	user-select: none;
-	/* Required to make elements draggable in old WebKit */
-	-khtml-user-drag: element;
-	-webkit-user-drag: element;
-}
-
-.column {
-	width: 280px;
-	float: left;
-	border: 1px solid #666;
-	background-color: rgba(0,0,0,.1);
-	margin: 5px 5px 5px 0;
-	-webkit-box-shadow: inset 0 0 3px #000;
-	-ms-box-shadow: inset 0 0 3px #000;
-	box-shadow: inset 0 0 3px #000;
-	cursor: move;
-}
-
-.column .content {
-	padding: 10px;
-}
-
-.column .treatment {
-	box-shadow: none;
-	border: 1px solid rgba(0,0,0,.5);
-	margin-bottom: 5px
-}
-
-.column header {
-	text-align: center;
-	text-shadow: #000 0 1px;
-	box-shadow: 5px;
-	padding: 5px;
-	background: #444
-}
-
-.column.over {
-	border: 2px dashed #999;
+pre {
+	font-size: 11px;
 }
 
 .clear {
 	clear: both;
 }
 
-#map {
+.treatment{
 	width: 100%;
-	height: 600px;
+	margin-bottom:10px;
+	border:1px solid rgba(255,255,255,.25);
+/*	box-shadow:0px 0px 8px rgba(0,0,0,.6)*/
 }
 
-@media (min-width: 978px) and (max-width: 1200px) {
-	.column {
-		width: 225px;
-	}
+.text_title {
+	font-weight: bold;
+	font-style: italic;
 }
 
-@media (min-width: 768px) and (max-width: 979px) {
-	.column {
-		width: 170px;
-	}
+.books {
+	padding: 10px;
+	cursor: pointer;
+	color: rgba(102,102,102,1);
+	border-bottom: 1px solid #fff;
+	opacity: .7;
 }
 
-@media (min-width: 600px) and (max-width: 767px) {
-	.column {
-		width: 130px;
-	}
+.books:hover {
+	opacity: 1;
+	color: rgba(0,0,0,1);
 }
 
-@media (max-width: 599px) {
-	.column {
-		width: 100%;
-		float: none;
-	}
+.title {
+	opacity: 1;
+	margin-bottom: 0;
+	font-weight: bold;
+}
+
+.author {
+	opacity: 1;
+	font-style: italic;
+}
+
+.books p, .books span{
+	opacity: .9 !important;
+}
+
+.bubble {
+	cursor: pointer;
+}
+
+.bubble-text, .bubble-text-glow {
+	text-transform: uppercase;
+	font-weight: bold;
+	cursor: pointer;
 }
