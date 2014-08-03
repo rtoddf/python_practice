@@ -1,4 +1,10 @@
-## When there are a lot of parameters it is easy to get confused about the correct order. Instead we can refer to parameters by name, and even assign them a default value just in case one was not provided by the calling program. Now the parameters can be specified in any order, and can be omitted.
+'''
+When there are a lot of parameters it is easy to get confused
+about the correct order. Instead we can refer to parameters by name,
+and even assign them a default value just in case one was not provided
+by the calling program. Now the parameters can be specified in any order,
+and can be omitted.
+'''
 
 def repeat(msg='<empty>', num=1):
 	return msg * num
@@ -13,7 +19,7 @@ def generic(*args, **kwargs):
 	print 'args: ', args
 	print 'kwargs: ', kwargs
 
-# print generic(1, 'African swallow', monty='python')
+print generic(1, 'African swallow', monty='python')
 
 song = [['four', 'calling', 'birds'],
 		['three', 'French', 'hens'],

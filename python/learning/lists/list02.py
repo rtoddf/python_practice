@@ -17,9 +17,9 @@ print 'min value: ', min(list1)
 METHODS - append, extend, count, index, insert, remove, sort, reverse
 remove only removes the first instance of the obj
 
-pop, removes and returns the last item in the list
 
-? - reverse
+
+pop, removes and returns the last item in the list
 '''
 
 list2.append(98)
