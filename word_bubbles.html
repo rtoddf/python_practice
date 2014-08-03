@@ -8,7 +8,7 @@
 		<meta name="author" content="">
 		<link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
 
-		<title>Word Worms</title>
+		<title>Python</title>
 		<link href="css/bootstrap.css" rel="stylesheet">
 		<link href="css/overwrites.css" rel="stylesheet">
 	</head>
@@ -23,12 +23,10 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-				  <a class="navbar-brand" href="index.html">NLTK</a>
+				  <a class="navbar-brand" href="index.html">Python</a>
 				</div>
 				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li><a href="worm_bubbles.html">Worm Bubbles</a></li>
-						<li><a href="presidents.html">US Presidents</a></li>
 					</ul>
 				</div>
 			</div>
@@ -36,13 +34,17 @@
 
 		<div class="container">
 			<div class="row">
-				<h3>Worm Bubbles</h3>
-				<p>Click a button on the right to see a visualization of the top ten words in that piece of literature. The text will also display below the visualization. I'm working on a way to highlight each word as you hover over the corresponding bubble.</p>
-				<div class="col-md-9 display">
-					<div id="example"></div>
+                <div class="col-md-12">
+    				<h3>Worm Bubbles</h3>
+    				<p>Click a button on the right to see a visualization of the top ten words in that piece of literature. The text will also display below the visualization. I'm working on a way to highlight each word as you hover over the corresponding bubble.</p>
 				</div>
-				<div class="col-md-3 book_menu"></div>
 			</div>
+            <div class="row">
+                <div class="col-md-9 display">
+                    <div id="example"></div>
+                </div>
+                <div class="col-md-3 book_menu"></div>
+            </div>
 			<div class="row">
 				<div class="col-md-12">
 					<div id="text"></div>
@@ -54,6 +56,6 @@
 		<script src="scripts/bootstrap/bootstrap.min.js"></script>
 		<script src="scripts/lib/d3.v3.min.js"></script>
 		<script src="scripts/lib/underscore-min.js"></script>
-		<script src="scripts/worm_bubbles.js"></script>
+		<script src="scripts/word_bubbles.js"></script>
 	</body>
 </html>
