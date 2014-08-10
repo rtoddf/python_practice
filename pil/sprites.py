@@ -34,7 +34,7 @@ image_urls = ['h11/AllPhotos/185113/p185113_i_h11_aa.jpg',
 'h10/AllPhotos/10102709/p10102709_i_h10_aa.jpg',
 'h10/AllPhotos/10367302/p10367302_i_h10_aa.jpg']
 
-# size = 300, 170
+size = 300, 170
 
 def get_imlist(path):
     return [os.path.join(path, f) for f in os.listdir(path) if f.endswith('.jpg')]
@@ -44,7 +44,7 @@ for im in image_urls:
     image_url = image_urls_base + str(im)
     # file, ext = os.path.splitext(im)
     image_dest =  image_directory + im.rsplit('/', 1)[-1]
-    # urllib.urlretrieve(image_url, image_dest)
+    urllib.urlretrieve(image_url, image_dest)
 
 # read the images from the dir - returns a list
 image_list = get_imlist(image_directory)
@@ -59,32 +59,37 @@ the_images = []
 
 for image in image_list:
     im = Image.open(image)
+    # im = im.thumbnail(size, Image.ANTIALIAS)
     im = im.resize((settings['width'], settings['height']))
     the_images.append(im)
 
 # create a thumbnail for each image
 for i, image in enumerate(the_images):
-    for j in range(5):
-        if i < j:
+    if i < settings['num_horizontal']:
+        for j in range(5):
             horizontal_point =  j * settings['width']
             vertical_point = 0
+            print image
             print (horizontal_point, vertical_point)
             sprite_image.paste(image, (horizontal_point, vertical_point))
-    # elif i > settings['num_horizontal'] and i < (settings['num_horizontal'] * 2):
-    #     j = 1
-    #     horizontal_point = 1
-    #     sprite_image.paste(out, (settings['width'] * j, horizontal_point * settings['height']))
-    #     j += 1
-    # elif i > (settings['num_horizontal'] * 2) and i < (settings['num_horizontal'] * 3):
-    #     j = 1
-    #     horizontal_point = 2
-    #     sprite_image.paste(out, (settings['width'] * j, horizontal_point * settings['height']))
-    #     j += 1
-    # elif i > (settings['num_horizontal'] * 3) and i < (settings['num_horizontal'] * 4):
-    #     j = 1
-    #     horizontal_point = 3
-    #     sprite_image.paste(out, (settings['width'] * j, horizontal_point * settings['height']))
-    #     j += 1
+    elif i > settings['num_horizontal'] and i < (settings['num_horizontal'] * 2):
+        for j in range(5):
+            horizontal_point =  j * settings['width']
+            vertical_point = 170
+            print (horizontal_point, vertical_point)
+            sprite_image.paste(image, (horizontal_point, vertical_point))
+    elif i > (settings['num_horizontal'] * 2) and i < (settings['num_horizontal'] * 3):
+        for j in range(5):
+            horizontal_point =  j * settings['width']
+            vertical_point = 340
+            print (horizontal_point, vertical_point)
+            sprite_image.paste(image, (horizontal_point, vertical_point))
+    elif i > (settings['num_horizontal'] * 3) and i < (settings['num_horizontal'] * 4):
+        for j in range(5):
+            horizontal_point =  j * settings['width']
+            vertical_point = 510
+            print (horizontal_point, vertical_point)
+            sprite_image.paste(image, (horizontal_point, vertical_point))
     
     
 sprite_image.show()
