@@ -41,7 +41,6 @@ def get_imlist(path):
 # download all images and save them to a thumbnails dir
 for im in image_urls:
     image_url = image_urls_base + str(im)
-    # file, ext = os.path.splitext(im)
     image_dest =  image_directory + im.rsplit('/', 1)[-1]
     # urllib.urlretrieve(image_url, image_dest)
 
@@ -75,6 +74,7 @@ for i in range(settings['total_images']):
         sprite_image.paste(the_images[i], ((i - (settings['num_horizontal'] * 3)) * settings['width'], settings['height'] * 3))
 
 sprite_image.show()
+sprite_image.save('images/tile_background_lg_sprite.jpg', 'JPEG')
 
 # clear all image that were downloaded
 # for image in image_list:
