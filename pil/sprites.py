@@ -1,5 +1,6 @@
 import urllib
 import os, sys
+import random
 from PIL import Image
 
 image_urls_base = 'http://tube.tmsimg.com/'
@@ -34,8 +35,6 @@ image_urls = ['h11/AllPhotos/185113/p185113_i_h11_aa.jpg',
 'h10/AllPhotos/10102709/p10102709_i_h10_aa.jpg',
 'h10/AllPhotos/10367302/p10367302_i_h10_aa.jpg']
 
-size = 300, 170
-
 def get_imlist(path):
     return [os.path.join(path, f) for f in os.listdir(path) if f.endswith('.jpg')]
 
@@ -44,59 +43,39 @@ for im in image_urls:
     image_url = image_urls_base + str(im)
     # file, ext = os.path.splitext(im)
     image_dest =  image_directory + im.rsplit('/', 1)[-1]
-    urllib.urlretrieve(image_url, image_dest)
+    # urllib.urlretrieve(image_url, image_dest)
 
 # read the images from the dir - returns a list
 image_list = get_imlist(image_directory)
 
+# new image dimensions
 sprite_dimensions = (settings['num_horizontal'] * settings['width'], settings['num_vertical'] * settings['height'])
 sprite_image = Image.new('RGB', sprite_dimensions, 'white')
-
-# for image in image_list:
-#     os.remove(image)
 
 the_images = []
 
 for image in image_list:
     im = Image.open(image)
-    # im = im.thumbnail(size, Image.ANTIALIAS)
     im = im.resize((settings['width'], settings['height']))
     the_images.append(im)
 
-# create a thumbnail for each image
-for i, image in enumerate(the_images):
-    if i < settings['num_horizontal']:
-        for j in range(5):
-            horizontal_point =  j * settings['width']
-            vertical_point = 0
-            print image
-            print (horizontal_point, vertical_point)
-            sprite_image.paste(image, (horizontal_point, vertical_point))
-    elif i > settings['num_horizontal'] and i < (settings['num_horizontal'] * 2):
-        for j in range(5):
-            horizontal_point =  j * settings['width']
-            vertical_point = 170
-            print (horizontal_point, vertical_point)
-            sprite_image.paste(image, (horizontal_point, vertical_point))
-    elif i > (settings['num_horizontal'] * 2) and i < (settings['num_horizontal'] * 3):
-        for j in range(5):
-            horizontal_point =  j * settings['width']
-            vertical_point = 340
-            print (horizontal_point, vertical_point)
-            sprite_image.paste(image, (horizontal_point, vertical_point))
-    elif i > (settings['num_horizontal'] * 3) and i < (settings['num_horizontal'] * 4):
-        for j in range(5):
-            horizontal_point =  j * settings['width']
-            vertical_point = 510
-            print (horizontal_point, vertical_point)
-            sprite_image.paste(image, (horizontal_point, vertical_point))
-    
-    
+random.shuffle(the_images)
+
+for i in range(settings['total_images']):
+    if i >= (settings['num_horizontal'] * 0) and i < settings['num_horizontal']:
+        sprite_image.paste(the_images[i], ((i - (settings['num_horizontal'] * 0)) * settings['width'], settings['height'] * 0))
+
+    if i >= (settings['num_horizontal'] * 1) and i < (settings['num_horizontal'] * 2):
+        sprite_image.paste(the_images[i], ((i - (settings['num_horizontal'] * 1)) * settings['width'], settings['height'] * 1))
+
+    if i >= (settings['num_horizontal'] * 2) and i < (settings['num_horizontal'] * 3):
+        sprite_image.paste(the_images[i], ((i - (settings['num_horizontal'] * 2)) * settings['width'], settings['height'] * 2))
+
+    if i >= (settings['num_horizontal'] * 3) and i < (settings['num_horizontal'] * 4):
+        sprite_image.paste(the_images[i], ((i - (settings['num_horizontal'] * 3)) * settings['width'], settings['height'] * 3))
+
 sprite_image.show()
 
-
-
-
-
-
-
+# clear all image that were downloaded
+# for image in image_list:
+#     os.remove(image)
