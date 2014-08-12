@@ -8,11 +8,13 @@ image_directory = 'images/thumbnails/'
 
 settings = {
     'width': 300,
-    'height': 170,
-    'num_vertical': 4,
+    'height': 168,
+    'num_vertical': 6,
     'num_horizontal': 5,
-    'total_images': 20
+    'total_images': 30
 }
+
+size = settings['width'], settings['height']
 
 image_urls = ['h11/AllPhotos/185113/p185113_i_h11_aa.jpg',
 'h11/AllPhotos/9994933/p9994933_i_h11_aa.jpg',
@@ -33,7 +35,18 @@ image_urls = ['h11/AllPhotos/185113/p185113_i_h11_aa.jpg',
 'h10/AllPhotos/10024445/p10024445_i_h11_aa.jpg',
 'h10/AllPhotos/10372543/p10372543_i_h11_aa.jpg',
 'h10/AllPhotos/10102709/p10102709_i_h10_aa.jpg',
-'h10/AllPhotos/10367302/p10367302_i_h10_aa.jpg']
+'h10/AllPhotos/10367302/p10367302_i_h10_aa.jpg',
+'h11/AllPhotos/8601149/p8601149_i_h11_aa.jpg',
+'h11/AllPhotos/10426921/p10426921_i_h11_aa.jpg',
+'h11/AllPhotos/9967027/p9967027_i_h11_aa.jpg',
+'h11/AllPhotos/10552215/p10552215_i_h11_aa.jpg',
+'h11/AllPhotos/185171/p185171_b_h11_ad.jpg',
+'h10/AllPhotos/9957510/p9957510_i_h10_aa.jpg',
+'h10/AllPhotos/10230693/p10230693_i_h10_aa.jpg',
+'h10/AllPhotos/10362866/p10362866_i_h10_aa.jpg',
+'h10/AllPhotos/9719232/p9719232_i_h10_aa.jpg',
+'h10/AllPhotos/10016553/p10016553_i_h10_aa.jpg',
+'h10/AllPhotos/9980214/p9980214_i_h10_aa.jpg']
 
 def get_imlist(path):
     return [os.path.join(path, f) for f in os.listdir(path) if f.endswith('.jpg')]
@@ -55,7 +68,7 @@ the_images = []
 
 for image in image_list:
     im = Image.open(image)
-    im = im.resize((settings['width'], settings['height']))
+    im.thumbnail(size, Image.ANTIALIAS)
     the_images.append(im)
 
 random.shuffle(the_images)
@@ -73,9 +86,24 @@ for i in range(settings['total_images']):
     if i >= (settings['num_horizontal'] * 3) and i < (settings['num_horizontal'] * 4):
         sprite_image.paste(the_images[i], ((i - (settings['num_horizontal'] * 3)) * settings['width'], settings['height'] * 3))
 
+    if i >= (settings['num_horizontal'] * 4) and i < (settings['num_horizontal'] * 5):
+        sprite_image.paste(the_images[i], ((i - (settings['num_horizontal'] * 4)) * settings['width'], settings['height'] * 4))
+
+    if i >= (settings['num_horizontal'] * 5) and i < (settings['num_horizontal'] * 6):
+        sprite_image.paste(the_images[i], ((i - (settings['num_horizontal'] * 5)) * settings['width'], settings['height'] * 5))
+
 sprite_image.show()
 sprite_image.save('images/tile_background_lg_sprite.jpg', 'JPEG')
 
 # clear all image that were downloaded
 # for image in image_list:
 #     os.remove(image)
+
+
+
+
+
+
+
+
+
