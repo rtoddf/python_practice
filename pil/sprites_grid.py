@@ -3,12 +3,19 @@ import os, sys
 import random
 from PIL import Image
 
-# where to save the images you are downloading
+image_urls_base = 'http://tube.tmsimg.com/'
 image_directory = 'images/thumbnails/'
 
-image_urls_base = 'http://tube.tmsimg.com/'
+settings = {
+    'width': 300,
+    'height': 168,
+    'num_vertical': 6,
+    'num_horizontal': 5,
+    'total_images': 30
+}
 
-# urls for 30 images
+size = settings['width'], settings['height']
+
 image_urls = ['h11/AllPhotos/185113/p185113_i_h11_aa.jpg',
 'h11/AllPhotos/9994933/p9994933_i_h11_aa.jpg',
 'h11/AllPhotos/10426177/p10426177_i_h11_aa.jpg',
@@ -41,17 +48,8 @@ image_urls = ['h11/AllPhotos/185113/p185113_i_h11_aa.jpg',
 'h10/AllPhotos/10016553/p10016553_i_h10_aa.jpg',
 'h10/AllPhotos/9980214/p9980214_i_h10_aa.jpg']
 
-# settings - currently only one size, but other sizes (md, sm, xs) can be added later
-settings = {
-    'width': 300,
-    'height': 168,
-    'num_vertical': 6,
-    'num_horizontal': 5,
-    'total_images': 30
-}
-
-# size of the thumbnails before pasting into larger image
-size = settings['width'], settings['height']
+def get_imlist(path):
+    return [os.path.join(path, f) for f in os.listdir(path) if f.endswith('.jpg')]
 
 # download all images and save them to a thumbnails dir
 for im in image_urls:
@@ -59,15 +57,11 @@ for im in image_urls:
     image_dest =  image_directory + im.rsplit('/', 1)[-1]
     # urllib.urlretrieve(image_url, image_dest)
 
-# get all files (after downloaded) with the .jpg extension
-def get_imlist(path):
-    return [os.path.join(path, f) for f in os.listdir(path) if f.endswith('.jpg')]
-
 # read the images from the dir - returns a list
 image_list = get_imlist(image_directory)
-    
+
 # new image dimensions
-sprite_dimensions = (settings['total_images'] * settings['width'], settings['height'])
+sprite_dimensions = (settings['num_horizontal'] * settings['width'], settings['num_vertical'] * settings['height'])
 sprite_image = Image.new('RGB', sprite_dimensions, 'white')
 
 the_images = []
@@ -77,17 +71,39 @@ for image in image_list:
     im.thumbnail(size, Image.ANTIALIAS)
     the_images.append(im)
 
-# shuffle the images randomly
 random.shuffle(the_images)
 
 for i in range(settings['total_images']):
-    sprite_image.paste(the_images[i], ((i - (settings['num_horizontal'] * 0)) * settings['width'], settings['height'] * 0))
+    if i >= (settings['num_horizontal'] * 0) and i < settings['num_horizontal']:
+        sprite_image.paste(the_images[i], ((i - (settings['num_horizontal'] * 0)) * settings['width'], settings['height'] * 0))
 
-# show() is only here for you to view the outcome
-# it can be commented out
+    if i >= (settings['num_horizontal'] * 1) and i < (settings['num_horizontal'] * 2):
+        sprite_image.paste(the_images[i], ((i - (settings['num_horizontal'] * 1)) * settings['width'], settings['height'] * 1))
+
+    if i >= (settings['num_horizontal'] * 2) and i < (settings['num_horizontal'] * 3):
+        sprite_image.paste(the_images[i], ((i - (settings['num_horizontal'] * 2)) * settings['width'], settings['height'] * 2))
+
+    if i >= (settings['num_horizontal'] * 3) and i < (settings['num_horizontal'] * 4):
+        sprite_image.paste(the_images[i], ((i - (settings['num_horizontal'] * 3)) * settings['width'], settings['height'] * 3))
+
+    if i >= (settings['num_horizontal'] * 4) and i < (settings['num_horizontal'] * 5):
+        sprite_image.paste(the_images[i], ((i - (settings['num_horizontal'] * 4)) * settings['width'], settings['height'] * 4))
+
+    if i >= (settings['num_horizontal'] * 5) and i < (settings['num_horizontal'] * 6):
+        sprite_image.paste(the_images[i], ((i - (settings['num_horizontal'] * 5)) * settings['width'], settings['height'] * 5))
+
 sprite_image.show()
 sprite_image.save('images/tile_background_lg_sprite.jpg', 'JPEG')
 
 # clear all image that were downloaded
-for image in image_list:
-    os.remove(image)
+# for image in image_list:
+#     os.remove(image)
+
+
+
+
+
+
+
+
+
