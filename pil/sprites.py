@@ -45,19 +45,20 @@ image_urls = ['h11/AllPhotos/185113/p185113_i_h11_aa.jpg',
 settings = {
     'width': 300,
     'height': 168,
-    'num_vertical': 6,
-    'num_horizontal': 5,
     'total_images': 30
 }
 
 # size of the thumbnails before pasting into larger image
 size = settings['width'], settings['height']
 
+if not os.path.exists(image_directory):
+    os.makedirs(image_directory)
+
 # download all images and save them to a thumbnails dir
 for im in image_urls:
     image_url = image_urls_base + str(im)
     image_dest =  image_directory + im.rsplit('/', 1)[-1]
-    # urllib.urlretrieve(image_url, image_dest)
+    urllib.urlretrieve(image_url, image_dest)
 
 # get all files (after downloaded) with the .jpg extension
 def get_imlist(path):
@@ -81,7 +82,7 @@ for image in image_list:
 random.shuffle(the_images)
 
 for i in range(settings['total_images']):
-    sprite_image.paste(the_images[i], ((i - (settings['num_horizontal'] * 0)) * settings['width'], settings['height'] * 0))
+    sprite_image.paste(the_images[i], (i * settings['width'], 0))
 
 # show() is only here for you to view the outcome
 # it can be commented out
