@@ -1,0 +1,30 @@
+path {
+	stroke-linejoin: round;
+	stroke-linecap: round;
+}
+
+.land {
+	fill: rgba(0,50,100,.3);
+}
+
+.land :hover {
+	fill: rgba(0,50,100,1);
+}
+
+.land .neighbor {
+	fill: rgba(0,50,100,.5);
+}
+
+.border {
+	pointer-events: none;
+	fill: none;
+	stroke: #f00;
+}
+
+.border--district {
+	stroke-width: .5px;
+}
+
+.border--state {
+	stroke-width: 1.5px;
+}
